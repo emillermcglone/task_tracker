@@ -11,7 +11,7 @@ import css from "../css/app.scss"
 //
 import "phoenix_html";
 import jQuery from 'jquery';
-window.jQuery = window.$ = jQuery;
+window.jQuery = window.$ = jQuery; // Bootstrap requires a global "$" object.
 import "bootstrap";
 
 // Import local files
