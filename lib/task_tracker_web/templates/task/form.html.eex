@@ -5,7 +5,7 @@
     </div>
   <% end %>
 
-  <div class="form-group hidden">
+  <div class="form-group" style="display: none">
     <%= label f, :creator_id, class: "control-label" %>
     <%= text_input f, :creator_id, class: "form-control", value: @current_user.id %>
     <%= error_tag f, :creator_id %>

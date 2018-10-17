@@ -3,6 +3,16 @@
 <ul>
 
   <li>
+    <strong>Creator:</strong>
+    <%= @task.creator_id %>
+  </li>
+
+  <li>
+    <strong>Assignee:</strong>
+    <%= @task.assignee_id %>
+  </li>
+
+  <li>
     <strong>Title:</strong>
     <%= @task.title %>
   </li>
