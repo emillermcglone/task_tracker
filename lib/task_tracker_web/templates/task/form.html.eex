@@ -11,10 +11,9 @@
     <%= error_tag f, :creator_id %>
   </div>
 
-  <%# switch text_input with select, and put in @assignables %>
   <div class="form-group">
     <%= label f, :assignee_id, class: "control-label" %>
-    <%= select f, :assignee_id, @assignables, class: "form-control", value: @current_user.id %> 
+    <%= text_input f, :assignee_id, class: "form-control", value: @current_user.id %> 
     <%= error_tag f, :assignee_id %>
   </div>
 
@@ -30,17 +29,19 @@
   <%= error_tag f, :description %>
   </div>
 
-  <div class="form-group">
-  <%= label f, :time, class: "control-label" %>
-  <%= datetime_select f, :time, class: "form-control" %>
-  <%= error_tag f, :time %>
-  </div>
+  <%= if @current_user.id do %>
+    <div class="form-group">
+    <%= label f, :time, class: "control-label" %>
+    <%= number_input f, :time, class: "form-control" %>
+    <%= error_tag f, :time %>
+    </div>
   
-  <div class="form-group">
-  <%= label f, :completed, class: "control-label" %>
-  <%= checkbox f, :completed, class: "form-control" %>
-  <%= error_tag f, :completed %>
-  </div>
+    <div class="form-group">
+    <%= label f, :completed, class: "control-label" %>
+    <%= checkbox f, :completed, class: "form-control" %>
+    <%= error_tag f, :completed %>
+    </div>
+  <%= end %>
 
   <div class="form-group">
     <%= submit "Save", class: "btn btn-primary"  %>

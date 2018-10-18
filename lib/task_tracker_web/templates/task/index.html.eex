@@ -14,22 +14,26 @@
     </tr>
   </thead>
   <tbody>
-<%= for task <- @tasks do %>
-    <tr>
-      <td><%= task.creator_id %></td>
-      <td><%= task.assignee_id %></td>
-      <td><%= task.title %></td>
-      <td><%= task.description %></td>
-      <td><%= task.time %></td>
-      <td><%= task.completed %></td>
+    <%= for task <- @tasks do %>
+      <tr>
+        <td><%= task.creator_id %></td>
+        <td><%= task.assignee_id %></td>
+        <td><%= task.title %></td>
+        <td><%= task.description %></td>
+        <td><%= task.time %></td>
+        <td><%= task.completed %></td>
 
       <td>
         <%= link "Show", to: Routes.task_path(@conn, :show, task) %>
-        <%= link "Edit", to: Routes.task_path(@conn, :edit, task) %>
-        <%= link "Delete", to: Routes.task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"] %>
+        <%= if @current_user == task.assignee_id  do %>
+          <%= link "Edit", to: Routes.task_path(@conn, :edit, task) %>
+        <% end %>
+        <%= if @current_user == task.creator_id  do %>
+          <%= link "Delete", to: Routes.task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"] %>
+        <% end %>
       </td>
-    </tr>
-<% end %>
+      </tr>
+  <% end %>
   </tbody>
 </table>
 
