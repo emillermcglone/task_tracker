@@ -11,9 +11,10 @@
     <%= error_tag f, :creator_id %>
   </div>
 
+  <%# switch text_input with select, and put in @assignables %>
   <div class="form-group">
     <%= label f, :assignee_id, class: "control-label" %>
-    <%= text_input f, :assignee_id, class: "form-control", value: @current_user.id %>
+    <%= select f, :assignee_id, @assignables, class: "form-control", value: @current_user.id %> 
     <%= error_tag f, :assignee_id %>
   </div>
 

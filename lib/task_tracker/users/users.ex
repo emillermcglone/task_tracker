@@ -21,6 +21,12 @@ defmodule TaskTracker.Users do
     Repo.all(User)
   end
 
+  ## List all the users who can be assigned to a task 
+  def list_assignable_users(conn) do
+    query = from u in User, select: {u.email, u.id}
+    Repo.all(query)
+  end
+
   @doc """
   Gets a single user.
 
