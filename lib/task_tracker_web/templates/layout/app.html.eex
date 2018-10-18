@@ -10,7 +10,7 @@
   <body>
     <div class="container">
     <%= if @current_user do %>
-      <nav class="navbar navbar-expand-sm navbar-light bg-white">
+      <nav class="navbar navbar-expand-sm navbar-light">
         <div class="col-8">
           <ul class="navbar-nav mr-auto">
             <li>

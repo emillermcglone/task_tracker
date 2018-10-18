@@ -1,5 +1,5 @@
 <p><h1>Your Tasks</h1></p>
-<table class="table striped-table">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>Creator</th>
@@ -19,6 +19,7 @@
             <td><%= task.time %></td>
             <td>
                 <%= link "Edit", to: Routes.task_path(@conn, :edit, task) %>
+                <%= link "Delete", to: Routes.task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"] %>
             </td>
         </tr>
         <% end %>

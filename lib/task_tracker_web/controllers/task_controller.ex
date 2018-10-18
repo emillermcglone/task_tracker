@@ -13,7 +13,7 @@ defmodule TaskTrackerWeb.TaskController do
   def new(conn, _params) do
     changeset = Tasks.change_task(%Task{})
     assignables = Users.list_assignable_users(conn)
-    render(conn, "new.html", changeset: changeset, assignables: assignables)
+    render(conn, "new.html", changeset: changeset, assignables: assignables, assigned_to: false)
   end
 
   def create(conn, %{"task" => task_params}) do
@@ -37,7 +37,7 @@ defmodule TaskTrackerWeb.TaskController do
     task = Tasks.get_task!(id)
     changeset = Tasks.change_task(task)
     assignables = Users.list_assignable_users(conn)
-    assigned_to = Task.get_field(changeset, :assignee_id)
+    assigned_to = task.assignee_id
     render(conn, "edit.html", task: task, changeset: changeset, assignables: assignables, assigned_to: assigned_to)
   end
 
@@ -61,6 +61,6 @@ defmodule TaskTrackerWeb.TaskController do
 
     conn
     |> put_flash(:info, "Task deleted successfully.")
-    |> redirect(to: Routes.task_path(conn, :index))
+    |> redirect(to: "/home")
   end
 end

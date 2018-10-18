@@ -1,7 +1,8 @@
 defmodule TaskTrackerWeb.PageController do
   use TaskTrackerWeb, :controller
 
-alias TaskTracker.Tasks
+  alias TaskTracker.Tasks
+  alias TaskTracker.Users
 
   def index(conn, _params) do
     if Plug.Conn.get_session(conn, :user_id) do

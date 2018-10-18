@@ -11,6 +11,7 @@
     <%= error_tag f, :creator_id %>
   </div>
 
+  <%# select, @assignables %>
   <div class="form-group">
     <%= label f, :assignee_id, class: "control-label" %>
     <%= text_input f, :assignee_id, class: "form-control", value: @current_user.id %> 
@@ -29,8 +30,7 @@
   <%= error_tag f, :description %>
   </div>
 
-  <%# add == @assigned_to %>
-  <%= if @current_user.id do %>
+  <%= if @current_user.id == @assigned_to do %>
     <div class="form-group">
     <%= label f, :time, class: "control-label" %>
     <%= number_input f, :time, class: "form-control" %>
