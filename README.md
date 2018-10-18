@@ -1,7 +1,7 @@
 # Design 
 The user starts at an index page where they can either log in or create a new account. Users must provide
 a valid email address (it must include @) to create an account. Once logged in, users are redirected 
-to a home page, displaying the tasks they are assigned to. They can select tasks to update or delete. Users can mark their tasks complete and enter the time spent on it. Time must be an increment of 15 minutes. Users can also create new tasks. Once finished, users can log out. 
+to a home page, displaying the tasks they are assigned to. They can update or delete tasks assigned to them. The time input must be in increments of 15 minutes. Users may also view all tasks where they can delete or edit tasks that they have created. On both the home and all tasks pages, users can create new tasks. Once finished, users can log out. 
 
 # TaskTracker
 

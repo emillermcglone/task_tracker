@@ -29,7 +29,7 @@
   <%= error_tag f, :description %>
   </div>
 
-  <%# add && @assigned_to %>
+  <%# add == @assigned_to %>
   <%= if @current_user.id do %>
     <div class="form-group">
     <%= label f, :time, class: "control-label" %>

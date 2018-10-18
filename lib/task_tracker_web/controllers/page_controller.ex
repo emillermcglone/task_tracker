@@ -1,6 +1,8 @@
 defmodule TaskTrackerWeb.PageController do
   use TaskTrackerWeb, :controller
 
+alias TaskTracker.Tasks
+
   def index(conn, _params) do
     if Plug.Conn.get_session(conn, :user_id) do
       redirect(conn, to: "/home")
@@ -12,7 +14,8 @@ defmodule TaskTrackerWeb.PageController do
     if !Plug.Conn.get_session(conn, :user_id) do
       redirect(conn, to: "/index")
     end
-    render conn, "home.html"
+    user_tasks = Tasks.list_assigned_tasks(conn)
+    render conn, "home.html", user_tasks: user_tasks
   end
 
 end
