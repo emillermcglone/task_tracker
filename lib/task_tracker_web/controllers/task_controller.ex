@@ -12,8 +12,7 @@ defmodule TaskTrackerWeb.TaskController do
 
   def new(conn, _params) do
     changeset = Tasks.change_task(%Task{})
-    assignables = Users.list_assignable_users(conn)
-    render(conn, "new.html", changeset: changeset, assignables: assignables, assigned_to: false)
+    render(conn, "new.html", changeset: changeset, assigned_to: false)
   end
 
   def create(conn, %{"task" => task_params}) do
@@ -36,9 +35,8 @@ defmodule TaskTrackerWeb.TaskController do
   def edit(conn, %{"id" => id}) do
     task = Tasks.get_task!(id)
     changeset = Tasks.change_task(task)
-    assignables = Users.list_assignable_users(conn)
     assigned_to = task.assignee_id
-    render(conn, "edit.html", task: task, changeset: changeset, assignables: assignables, assigned_to: assigned_to)
+    render(conn, "edit.html", task: task, changeset: changeset, assigned_to: assigned_to)
   end
 
   def update(conn, %{"id" => id, "task" => task_params}) do

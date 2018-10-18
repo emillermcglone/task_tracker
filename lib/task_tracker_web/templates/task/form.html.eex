@@ -14,7 +14,7 @@
   <%# select, @assignables %>
   <div class="form-group">
     <%= label f, :assignee_id, class: "control-label" %>
-    <%= text_input f, :assignee_id, class: "form-control", value: @current_user.id %> 
+    <%= select f, :assignee_id, Enum.map(TaskTracker.Users.list_users(), &{&1.email, &1.id}), class: "form-control", value: @current_user.id %> 
     <%= error_tag f, :assignee_id %>
   </div>
 

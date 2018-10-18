@@ -1,4 +1,5 @@
 <p><h1>Your Tasks</h1></p>
+<span><%= link "New Task", to: Routes.task_path(@conn, :new) %></span>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -25,4 +26,3 @@
         <% end %>
     </tbody>
 </table>
-<span><%= link "New Task", to: Routes.task_path(@conn, :new) %></span>
