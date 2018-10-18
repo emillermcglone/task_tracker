@@ -24,6 +24,7 @@
         <td><%= task.time %></td>
 
       <td>
+        <%= link "Show", to: Routes.task_path(@conn, :show, task) %>
         <%= if @current_user.id == task.assignee_id || @current_user.id == task.creator_id do %>
           <%= link "Edit", to: Routes.task_path(@conn, :edit, task) %>
         <% end %>
