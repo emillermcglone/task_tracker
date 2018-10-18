@@ -20,7 +20,7 @@ defmodule TaskTrackerWeb.UserController do
         conn
         |> put_flash(:info, "User created successfully.")
         |> put_session(:user_id, user.id)
-        |> redirect(to: Routes.user_path(conn, :show, user))
+        |> redirect(to: "/home")
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)

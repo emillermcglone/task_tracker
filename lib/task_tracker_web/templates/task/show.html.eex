@@ -23,13 +23,13 @@
   </li>
 
   <li>
-    <strong>Time:</strong>
-    <%= @task.time %>
+    <strong>Completed:</strong>
+    <%= @task.completed %>
   </li>
 
   <li>
-    <strong>Completed:</strong>
-    <%= @task.completed %>
+    <strong>Time Spent:</strong>
+    <%= @task.time %>
   </li>
 
 </ul>

@@ -7,8 +7,8 @@
       <th>Assignee</th>
       <th>Title</th>
       <th>Description</th>
-      <th>Time</th>
       <th>Completed</th>
+      <th>Time Spent</th>
 
       <th></th>
     </tr>
@@ -20,8 +20,8 @@
         <td><%= task.assignee_id %></td>
         <td><%= task.title %></td>
         <td><%= task.description %></td>
-        <td><%= task.time %></td>
         <td><%= task.completed %></td>
+        <td><%= task.time %></td>
 
       <td>
         <%= link "Show", to: Routes.task_path(@conn, :show, task) %>
