@@ -19,6 +19,7 @@ defmodule TaskTracker.Tasks do
   """
   def list_tasks do
     Repo.all(Task)
+    #|> Repo.preload(:user)
   end
 
   # List tasks assigned to the user 
