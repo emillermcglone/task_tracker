@@ -21,6 +21,20 @@ defmodule TaskTracker.Managements do
     Repo.all(Management)
   end
 
+  # Get manager id for user
+  def get_manager(conn) do 
+    user_id = Plug.Conn.get_session(conn, :user_id)
+    query = from m in Management, where: m.underling_id == ^user_id, select: m.manager_id
+    Repo.all(query) 
+  end 
+
+  # List all underlings for the user 
+  def list_underlings(conn) do 
+    user_id = Plug.Conn.get_session(conn, :user_id)
+    query = from m in Management, where: m.manager_id == ^user_id, select: m.underling_id
+    Repo.all(query)
+  end
+
   @doc """
   Gets a single management.
 

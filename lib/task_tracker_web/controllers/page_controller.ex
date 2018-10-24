@@ -3,6 +3,7 @@ defmodule TaskTrackerWeb.PageController do
 
   alias TaskTracker.Tasks
   alias TaskTracker.Users
+  alias TaskTracker.Managements
 
   def index(conn, _params) do
     if Plug.Conn.get_session(conn, :user_id) do
@@ -15,8 +16,11 @@ defmodule TaskTrackerWeb.PageController do
     if !Plug.Conn.get_session(conn, :user_id) do
       redirect(conn, to: "/index")
     end
+    manager = Managements.get_manager(conn)
     user_tasks = Tasks.list_assigned_tasks(conn)
-    render conn, "home.html", user_tasks: user_tasks
+    underlings = Managements.list_underlings(conn)
+    underlings = Enum.map(underlings, fn(x) -> Tasks.list_underling_tasks(conn, x) end)
+    render(conn, "home.html", user_tasks: user_tasks, manager: manager, underlings: underlings)
   end
 
 end

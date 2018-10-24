@@ -1,6 +1,9 @@
-<p><h1>Your Tasks</h1></p>
-<span><%= link "New Task", to: Routes.task_path(@conn, :new) %></span>
-<table class="table table-striped">
+<p><h1>Home Page</h1></p>
+
+<p><h3>Your Manager: <%= @manager %></h3></p>
+<p><h3>Your Tasks</h3></p>
+
+<p><table class="table table-striped">
     <thead>
         <tr>
             <th>Creator</th>
@@ -25,4 +28,36 @@
         </tr>
         <% end %>
     </tbody>
-</table>
+</table></p>
+
+<p><h3>Your Underling's Tasks</h3></p>
+
+<%= for underling <- @underlings do %>
+    <h4><%= underling.underling_id %>'s Tasks</h4>
+    <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Completed</th>
+            <th>Time Spent</th>
+        </tr>
+    </thead>
+    <tbody>
+    <%= for underling_task <- underling.tasks do %>
+        <tr>
+            <td><%= link(underling_task.title,to: Routes.task_path(@conn, :show, underling_task) )%></td>
+            <td><%= underling_task.description %></td>
+            <td><%= underling_task.completed %></td>
+            <td><%= underling_task.time %></td>
+            <td>
+                <%= link "Edit", to: Routes.task_path(@conn, :edit, underling_task) %>
+                <%= link "Delete", to: Routes.task_path(@conn, :delete, underling_task), method: :delete, data: [confirm: "Are you sure?"] %>
+            </td>
+        </tr>    
+    <% end %>
+    </tbody>
+    </table>
+<% end %>
+
+<p><span><%= link "New Task", to: Routes.task_path(@conn, :new) %></span></p>
