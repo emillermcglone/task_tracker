@@ -16,11 +16,12 @@ defmodule TaskTrackerWeb.PageController do
     if !Plug.Conn.get_session(conn, :user_id) do
       redirect(conn, to: "/index")
     end
-    manager = Managements.get_manager(conn)
+    manager_id = Managements.get_manager(conn)
     user_tasks = Tasks.list_assigned_tasks(conn)
+    users = Users.list_users()
     underlings = Managements.list_underlings(conn)
     underlings = Enum.map(underlings, fn(x) -> Tasks.list_underling_tasks(conn, x) end)
-    render(conn, "home.html", user_tasks: user_tasks, manager: manager, underlings: underlings)
+    render(conn, "home.html", user_tasks: user_tasks, users: users, manager_id: manager_id, underlings: underlings)
   end
 
 end

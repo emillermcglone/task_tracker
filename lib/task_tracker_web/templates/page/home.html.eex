@@ -1,6 +1,6 @@
 <p><h1>Home Page</h1></p>
 
-<p><h3>Your Manager: <%= @manager %></h3></p>
+<p><h3>Your Manager: <%= @manager_id %></h3></p>
 <p><h3>Your Tasks</h3></p>
 
 <p><table class="table table-striped">
@@ -16,7 +16,11 @@
     <tbody>
         <%= for task <- @user_tasks do %>
         <tr>
-            <td><%= task.creator_id %></td>
+            <%= for user <- @users do %>
+                <%= if user.id == task.creator_id do %>
+                    <td><%= user.email %></td>
+                <% end %>
+            <% end %>
             <td><%= link(task.title,to: Routes.task_path(@conn, :show, task) )%></td>
             <td><%= task.description %></td>
             <td><%= task.completed %></td>
@@ -33,7 +37,11 @@
 <p><h3>Your Underling's Tasks</h3></p>
 
 <%= for underling <- @underlings do %>
-    <h4><%= underling.underling_id %>'s Tasks</h4>
+    <%= for user <- @users do %>
+        <%= if user.id ==  underling.underling_id do %>
+            <h4><%= user.email %>'s Tasks</h4>
+        <% end %>
+    <% end %>
     <table class="table table-striped">
     <thead>
         <tr>
