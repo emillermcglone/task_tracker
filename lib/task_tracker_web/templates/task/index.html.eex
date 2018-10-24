@@ -16,8 +16,16 @@
   <tbody>
     <%= for task <- @tasks do %>
       <tr>
-        <td><%= task.creator_id %></td>
-        <td><%= task.assignee_id %></td>
+        <%= for user <- @users do %>
+          <%= if user.id == task.creator_id do %>
+            <td><%= user.email %></td>
+          <% end %>
+        <% end %>
+        <%= for user <- @users do %>
+          <%= if user.id == task.assignee_id do %>
+            <td><%= user.email %></td>
+          <% end %>
+        <% end %>
         <td><%= link(task.title, to: Routes.task_path(@conn, :show, task))%></td>
         <td><%= task.description %></td>
         <td><%= task.completed %></td>

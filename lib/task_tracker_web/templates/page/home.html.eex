@@ -39,7 +39,7 @@
 <%= for underling <- @underlings do %>
     <%= for user <- @users do %>
         <%= if user.id ==  underling.underling_id do %>
-            <h4><%= user.email %>'s Tasks</h4>
+            <h5><%= user.email %>'s Tasks</h5>
         <% end %>
     <% end %>
     <table class="table table-striped">
