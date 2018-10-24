@@ -14,12 +14,11 @@
         <%= for task <- @user_tasks do %>
         <tr>
             <td><%= task.creator_id %></td>
-            <td><%= task.title %></td>
+            <td><%= link(task.title,to: Routes.task_path(@conn, :show, task) )%></td>
             <td><%= task.description %></td>
             <td><%= task.completed %></td>
             <td><%= task.time %></td>
             <td>
-                <%= link "Show", to: Routes.task_path(@conn, :show, task) %>
                 <%= link "Edit", to: Routes.task_path(@conn, :edit, task) %>
                 <%= link "Delete", to: Routes.task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"] %>
             </td>
