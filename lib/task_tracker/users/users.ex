@@ -7,6 +7,7 @@ defmodule TaskTracker.Users do
   alias TaskTracker.Repo
 
   alias TaskTracker.Users.User
+  alias TaskTracker.Managements.Management
 
   @doc """
   Returns the list of users.
@@ -19,6 +20,14 @@ defmodule TaskTracker.Users do
   """
   def list_users do
     Repo.all(User)
+  end
+
+  # List assignable users, underlings and the user 
+  def list_assignable_users(conn) do 
+    user_id = Plug.Conn.get_session(conn, :user_id)
+    query = from m in Management, where: m.manager_id == ^user_id, select: m.underling_id
+    Repo.all(query)
+      |> Enum.concat([user_id])
   end
 
   @doc """
