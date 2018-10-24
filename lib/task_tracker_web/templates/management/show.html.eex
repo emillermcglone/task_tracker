@@ -1,0 +1,15 @@
+<h1>Show Management</h1>
+
+<ul>
+    <li>
+        <strong>Manager:</strong>
+        <%= @management.manager_id %>
+    </li>
+    <li>
+        <strong>Created by:</strong>
+        <%= @management.underling_id %>
+    </li>
+</ul>
+
+<span><%= link "Edit", to: Routes.management_path(@conn, :edit, @management) %></span>
+<span><%= link "Back", to: Routes.management_path(@conn, :index) %></span>
