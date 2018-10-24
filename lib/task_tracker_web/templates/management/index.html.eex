@@ -12,17 +12,25 @@
   <tbody>
 <%= for management <- @managements do %>
     <tr>
-      <td><%= management.manager_id %></td>
-      <td><%= management.underling_id %></td>
-      
+      <%= for user <- @users do %>
+        <%= if user.id == management.manager_id do %>
+          <td><%= user.email %></td>
+        <% end %>
+      <% end %>
+      <%= for user <- @users do %>
+        <%= if user.id == management.underling_id do %>
+          <td><%= user.email %></td>
+        <% end %>
+      <% end %>
       <td>
-        <%= link "Show", to: Routes.management_path(@conn, :show, management) %>
+      <%= if @current_user.id == management.manager_id do %>
         <%= link "Edit", to: Routes.management_path(@conn, :edit, management) %>
         <%= link "Delete", to: Routes.management_path(@conn, :delete, management), method: :delete, data: [confirm: "Are you sure?"] %>
+      <% end %>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<span><%= link "New Management", to: Routes.management_path(@conn, :new) %></span>
+<span><%= link "New Underling", to: Routes.management_path(@conn, :new) %></span>

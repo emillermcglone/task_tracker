@@ -2,11 +2,13 @@ defmodule TaskTrackerWeb.ManagementController do
   use TaskTrackerWeb, :controller
 
   alias TaskTracker.Managements
+  alias TaskTracker.Users
   alias TaskTracker.Managements.Management
 
   def index(conn, _params) do
     managements = Managements.list_managements()
-    render(conn, "index.html", managements: managements)
+    users = Users.list_users()
+    render(conn, "index.html", managements: managements, users: users)
   end
 
   def new(conn, _params) do
@@ -19,7 +21,7 @@ defmodule TaskTrackerWeb.ManagementController do
       {:ok, management} ->
         conn
         |> put_flash(:info, "Management created successfully.")
-        |> redirect(to: Routes.management_path(conn, :show, management))
+        |> redirect(to: "/Management")
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -44,7 +46,7 @@ defmodule TaskTrackerWeb.ManagementController do
       {:ok, management} ->
         conn
         |> put_flash(:info, "Management updated successfully.")
-        |> redirect(to: Routes.management_path(conn, :show, management))
+        |> redirect(to: "/Management")
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", management: management, changeset: changeset)
@@ -57,6 +59,6 @@ defmodule TaskTrackerWeb.ManagementController do
 
     conn
     |> put_flash(:info, "Management deleted successfully.")
-    |> redirect(to: Routes.management_path(conn, :index))
+    |> redirect(to: "/Management")
   end
 end

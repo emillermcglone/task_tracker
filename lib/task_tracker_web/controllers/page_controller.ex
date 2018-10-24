@@ -17,6 +17,7 @@ defmodule TaskTrackerWeb.PageController do
       redirect(conn, to: "/index")
     end
     manager_id = Managements.get_manager(conn)
+    IO.inspect(manager_id)
     user_tasks = Tasks.list_assigned_tasks(conn)
     users = Users.list_users()
     underlings = Managements.list_underlings(conn)
