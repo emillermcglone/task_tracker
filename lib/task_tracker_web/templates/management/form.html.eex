@@ -10,10 +10,11 @@
     <%= error_tag f, :manager_id %>
   </div>
 
+  <%# Enum.map(TaskTracker.Users.list_users(), &{&1.email, &1.id}) %>
    <div class="form-group">
     <%= label f, "Choose an underling", class: "control-label" %>
-    <%= select f, :underling_id, Enum.map(TaskTracker.Users.list_users(), &{&1.email, &1.id}), class: "form-control" %>
-    <%= error_tag f, :underling_id %>
+    <%= select f, :underling_id, @assignable_underlings, class: "form-control" %>
+    <%= error_tag f, :no_duplicates %>
   </div>
 
   <div>

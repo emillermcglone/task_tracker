@@ -25,7 +25,8 @@ defmodule TaskTrackerWeb.TaskController do
         |> redirect(to: Routes.task_path(conn, :show, task))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+      assignables = Users.list_assignable_users(conn)
+        render(conn, "new.html", changeset: changeset, assignables: assignables)
     end
   end
 

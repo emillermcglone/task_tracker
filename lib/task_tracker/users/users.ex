@@ -22,13 +22,27 @@ defmodule TaskTracker.Users do
     Repo.all(User)
   end
 
-  # List assignable users, underlings and the user 
+  #For Management Form: list users to assign as underlings, not self or manager 
+  def list_assignable_underlings(conn, manager_id) do 
+    user_id = Plug.Conn.get_session(conn, :user_id)
+    query = from u in User, where: u.id != ^user_id, select: {u.email, u.id}
+    Repo.all(query)
+  end
+
+  # For Task Form: List assignable users, underlings and the user 
   def list_assignable_users(conn) do 
     user_id = Plug.Conn.get_session(conn, :user_id)
     query = from m in Management, where: m.manager_id == ^user_id, select: m.underling_id
     Repo.all(query)
       |> Enum.concat([user_id])
   end
+
+  # List the assignable users email
+  def list_assignable_user_email(conn, assignable_id) do
+    query = from u in User, where: u.id == ^assignable_id, select: u
+    %{assignable_id: assignable_id, users: Repo.all(query)}
+  end
+
 
   @doc """
   Gets a single user.

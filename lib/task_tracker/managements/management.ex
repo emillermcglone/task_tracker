@@ -16,6 +16,6 @@ defmodule TaskTracker.Managements.Management do
     management
     |> cast(attrs, [:manager_id, :underling_id])
     |> validate_required([:manager_id, :underling_id])
-    |> unique_constraint(:no_duplicates, name: :no_dups)
+    |> unique_constraint(:no_duplicates, name: :no_dups, message: "They are already your underling")
   end
 end

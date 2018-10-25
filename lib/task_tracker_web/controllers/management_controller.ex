@@ -13,7 +13,9 @@ defmodule TaskTrackerWeb.ManagementController do
 
   def new(conn, _params) do
     changeset = Managements.change_management(%Management{})
-    render(conn, "new.html", changeset: changeset)
+    manager_id = Managements.get_manager(conn)
+    assignable_underlings = Users.list_assignable_underlings(conn, manager_id)
+    render(conn, "new.html", changeset: changeset, assignable_underlings: assignable_underlings)
   end
 
   def create(conn, %{"management" => management_params}) do
@@ -21,10 +23,12 @@ defmodule TaskTrackerWeb.ManagementController do
       {:ok, management} ->
         conn
         |> put_flash(:info, "Management created successfully.")
-        |> redirect(to: "/Management")
+        |> redirect(to: "/managements")
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+      manager_id = Managements.get_manager(conn)
+      assignable_underlings = Users.list_assignable_underlings(conn, manager_id)
+        render(conn, "new.html", changeset: changeset, assignable_underlings: assignable_underlings)
     end
   end
 
@@ -36,7 +40,9 @@ defmodule TaskTrackerWeb.ManagementController do
   def edit(conn, %{"id" => id}) do
     management = Managements.get_management!(id)
     changeset = Managements.change_management(management)
-    render(conn, "edit.html", management: management, changeset: changeset)
+    manager_id = Managements.get_manager(conn)
+    assignable_underlings = Users.list_assignable_underlings(conn, manager_id)
+    render(conn, "edit.html", management: management, changeset: changeset, assignable_underlings: assignable_underlings)
   end
 
   def update(conn, %{"id" => id, "management" => management_params}) do
@@ -46,7 +52,7 @@ defmodule TaskTrackerWeb.ManagementController do
       {:ok, management} ->
         conn
         |> put_flash(:info, "Management updated successfully.")
-        |> redirect(to: "/Management")
+        |> redirect(to: "/managements")
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", management: management, changeset: changeset)
@@ -59,6 +65,6 @@ defmodule TaskTrackerWeb.ManagementController do
 
     conn
     |> put_flash(:info, "Management deleted successfully.")
-    |> redirect(to: "/Management")
+    |> redirect(to: "/managements")
   end
 end
