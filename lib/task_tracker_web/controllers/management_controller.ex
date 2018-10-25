@@ -34,7 +34,8 @@ defmodule TaskTrackerWeb.ManagementController do
 
   def show(conn, %{"id" => id}) do
     management = Managements.get_management!(id)
-    render(conn, "show.html", management: management)
+    users = Users.list_users()
+    render(conn, "show.html", management: management, users: users)
   end
 
   def edit(conn, %{"id" => id}) do

@@ -34,7 +34,8 @@ defmodule TaskTrackerWeb.TaskController do
     task = Tasks.get_task!(id)
     assigned_to = task.assignee_id
     created_by = task.creator_id
-    render(conn, "show.html", task: task, assigned_to: assigned_to, created_by: created_by)
+    users = Users.list_users
+    render(conn, "show.html", task: task, assigned_to: assigned_to, created_by: created_by, users: users)
   end
 
   def edit(conn, %{"id" => id}) do

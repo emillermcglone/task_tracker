@@ -1,6 +1,7 @@
-<p><h1>Home Page</h1></p>
+<p><h1><%= @current_user.email%>'s Task Tracker</h1></p>
 <p><span><%= link "New Underling", to: Routes.management_path(@conn, :new) %></span></p>
 <p><span><%= link "New Task", to: Routes.task_path(@conn, :new) %></span></p>
+<br>
 <p><h3>Your Manager <%= @manager_id %></h3> </p>
 <%= for m <- @manager_id do %>
     <%= for user <- @users do %>
@@ -11,6 +12,7 @@
         <% end %>
     <% end %>
 <% end %>
+<br>
 <p><h3>Your Tasks</h3></p>
 <p><table class="table table-striped">
     <thead>
@@ -42,7 +44,7 @@
         <% end %>
     </tbody>
 </table></p>
-
+<br>
 <p><h3>Your Underling's Tasks</h3></p>
 <%= for underling <- @underlings do %>
     <%= for user <- @users do %>
@@ -74,6 +76,7 @@
     <% end %>
     </tbody>
     </table>
+    <br>
 <% end %>
 
 

@@ -3,11 +3,19 @@
 <ul>
     <li>
         <strong>Manager:</strong>
-        <%= @management.manager_id %>
+        <%= for user <- @users do %>
+            <%= if user.id == @management.manager_id do %>   
+                <%= user.email %>
+            <% end %>
+        <% end %>
     </li>
     <li>
-        <strong>Created by:</strong>
-        <%= @management.underling_id %>
+        <strong>Uderling:</strong>
+        <%= for user <- @users do %>
+            <%= if user.id == @management.underling_id do %>   
+                <%= user.email %>
+            <% end %>
+        <% end %>
     </li>
 </ul>
 

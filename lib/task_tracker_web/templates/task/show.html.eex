@@ -4,12 +4,20 @@
 
   <li>
     <strong>Creator:</strong>
-    <%= @task.creator_id %>
+      <%= for user <- @users do %>
+        <%= if user.id == @task.creator_id do %>
+          <%= user.email %>
+        <% end %>
+      <% end %>
   </li>
 
   <li>
     <strong>Assignee:</strong>
-    <%= @task.assignee_id %>
+      <%= for user <- @users do %>
+        <%= if user.id == @task.assignee_id do %>
+          <%= user.email %>
+        <% end %>
+      <% end %>
   </li>
 
   <li>
