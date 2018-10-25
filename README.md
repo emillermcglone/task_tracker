@@ -13,9 +13,7 @@ In the management page, users can view all users' managers/underlings. Users who
 Once finished, users can log out. 
 
 # Design Choices 
-Users can have more than one manager, but duplicate records of manager/underling are not allowed. 
-As it was not specified, cyclical relationships of manager/underling are allowed. 
-Users may still assign tasks to themselves.
+Users can have more than one manager, but duplicate records of manager/underling are not allowed. Users cannot manage themselves. As it was not specified, cyclical relationships of manager/underling are allowed. Users may still assign tasks to themselves.
 
 # TaskTracker
 

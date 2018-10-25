@@ -42,7 +42,8 @@
   </li>
 
 </ul>
-<%= if @current_user.id == @assigned_to || @current_user.id == @created_by do %> 
-  <span><%= link "Edit", to: Routes.task_path(@conn, :edit, @task) %></span>
-<%= end %>
 <span><%= link "Back", to: "/home" %></span>
+
+<%= if @current_user.id == @assigned_to || @current_user.id == @created_by do %> 
+  | <span><%= link "Edit", to: Routes.task_path(@conn, :edit, @task) %></span>  
+<%= end %>

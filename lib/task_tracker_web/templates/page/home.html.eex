@@ -62,6 +62,7 @@
     <table class="table table-striped">
     <thead>
         <tr>
+            <th>Creator</th>
             <th>Title</th>
             <th>Description</th>
             <th>Completed</th>
@@ -74,6 +75,11 @@
     <tbody>
     <%= for underling_task <- underling.tasks do %>
         <tr>
+            <%= for user <- @users do %>
+                <%= if user.id == underling_task.creator_id do %>
+                    <td><%= user.email %></td>
+                <% end %>
+            <% end %>
             <td><%= link(underling_task.title,to: Routes.task_path(@conn, :show, underling_task) )%></td>
             <td><%= underling_task.description %></td>
             <td><%= underling_task.completed %></td>

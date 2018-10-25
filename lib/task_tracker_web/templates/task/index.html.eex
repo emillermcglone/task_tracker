@@ -40,7 +40,7 @@
         </td>
         <td>
           <%= if @current_user.id == task.assignee_id || @current_user.id == task.creator_id do %>
-            <%= link "Edit", to: Routes.task_path(@conn, :edit, task) %>
+            <%= link "Edit", to: Routes.task_path(@conn, :edit, task) %> |
           <% end %>
           <%= if @current_user.id == task.creator_id || @current_user.id == task.assignee_id do %>
             <%= link "Delete", to: Routes.task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"] %>
