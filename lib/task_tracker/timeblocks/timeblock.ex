@@ -16,5 +16,6 @@ defmodule TaskTracker.Timeblocks.Timeblock do
     timeblock
     |> cast(attrs, [:start_time, :end_time, :task_id])
     |> validate_required([:start_time, :end_time, :task_id])
+    |> unique_constraint(:task_id, name: :timeblocks_task_id_index, message: "Time Spent can only have one entry")
   end
 end

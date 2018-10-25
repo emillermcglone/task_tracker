@@ -49,6 +49,7 @@ defmodule TaskTrackerWeb.TaskController do
   def update(conn, %{"id" => id, "task" => task_params}) do
     task = Tasks.get_task!(id)
     assigned_to = task.assignee_id
+    assignables = Users.list_assignable_users(conn)
 
     case Tasks.update_task(task, task_params) do
       {:ok, task} ->
@@ -57,7 +58,7 @@ defmodule TaskTrackerWeb.TaskController do
         |> redirect(to: Routes.task_path(conn, :show, task))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", task: task, changeset: changeset, assigned_to: assigned_to)
+        render(conn, "edit.html", task: task, changeset: changeset, assigned_to: assigned_to, assignables: assignables)
     end
   end
 

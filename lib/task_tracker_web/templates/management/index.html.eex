@@ -24,7 +24,6 @@
       <% end %>
       <td>
       <%= if @current_user.id == management.manager_id do %>
-        <%= link "Edit", to: Routes.management_path(@conn, :edit, management) %> |
         <%= link "Delete", to: Routes.management_path(@conn, :delete, management), method: :delete, data: [confirm: "Are you sure?"] %>
       <% end %>
       </td>

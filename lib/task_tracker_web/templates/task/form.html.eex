@@ -31,15 +31,38 @@
 
   <%= if @current_user.id == @assigned_to do %>
     <p>Time Spent</p>
-    <div>
-      <p><span>Start time: <input id="addnew-timeblock" type="datetime-local" novalidate></span></p>
-      <p><span>End time: <input id="endnew-timeblock" type="datetime-local" novalidate></span></p>
-    </div>
 
+    <table class="table table-striped">
+      <thread>
+        <tr>
+          <th>Time Started</th>
+          <th>Time Ended</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thread>
+      <tbody>
+        <%= for timeblock <- @task.timeblock do %>
+          <tr>
+            <td><%= timeblock.start_time %></td>
+            <td><%= timeblock.end_time %></td>
+            <td><%= link "Delete", to: Routes.timeblock_path(@conn, :delete, timeblock), method: :delete, data: [confirm: "Are you sure? Please refresh page after confirming"] %><td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div>
+      <p><span>Start time: <input id="addnew-timeblock" type="datetime-local"></span></p>
+      <p><span>End time: <input id="endnew-timeblock" type="datetime-local"></span></p>
+    </div>
+    
     <button class="btn btn-primary"
       id="new-timeblock-button"
       data-task-id="<%= @task.id %>"
-      onClick=window.addTimeBlock(this)>Add timeblock</button>
+      
+      onClick="window.addTimeBlock(this); return false;">Add timeblock
+    </button>
 
     <br></br>
     <div class="form-group">

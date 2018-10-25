@@ -10,6 +10,6 @@ defmodule TaskTracker.Repo.Migrations.CreateTimeblocks do
       timestamps()
     end
 
-    create index(:timeblocks, [:task_id])
+    create index(:timeblocks, [:task_id], unique: true)
   end
 end

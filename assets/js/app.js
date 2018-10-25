@@ -23,11 +23,13 @@ import "bootstrap";
 
 window.addTimeBlock = (ev) => {
     let task_id = $(ev).data('task-id');
-    let start_time = $("#addnew-timeblock").val;
-    let end_time = $("endnew-timeblock").val;
+    let start_time = $("#addnew-timeblock").val();
+    let end_time = $("#endnew-timeblock").val();
 
+    console.log(start_time)
+    console.log(end_time)
     //Check not empty
-    if (start_time != "" && end_time != "") {
+    if (start_time !== "" && end_time !== "") {
         let text = JSON.stringify({
             timeblock: {
                 task_id: task_id,
@@ -44,7 +46,7 @@ window.addTimeBlock = (ev) => {
             success: (resp) => {
                 location.reload();
             },
-        });
+        }).fail((err) => alert("Time Spent can only have one entry"));
 
     } else {
         location.reload();
