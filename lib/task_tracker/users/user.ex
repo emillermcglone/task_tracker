@@ -7,11 +7,18 @@ defmodule TaskTracker.Users.User do
     field :admin, :boolean, default: false
     field :email, :string
 
-    has_many :underlings, TaskTracker.Users.User
-    has_one :manager, TaskTracker.Users.User
-    
-    has_one :manager_managements, TaskTracker.Managements.Management, foreign_key: :underling_id
+    # All underling management records where I am the manager
     has_many :underlings_managements, TaskTracker.Managements.Management, foreign_key: :manager_id
+
+    # All managemnt records where I am the underling 
+    has_one :manager_managements, TaskTracker.Managements.Management, foreign_key: :underling_id
+
+    # All underlings I manage
+    has_many :underlings, through: [:underlings_managements, :underling]
+    
+    # User who manages me 
+    has_one :manager, through: [:manager_managements, :manager]
+
     timestamps()
   end
 

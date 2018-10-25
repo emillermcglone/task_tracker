@@ -1,7 +1,5 @@
 <p><h1><%= @current_user.email%>'s Task Tracker</h1></p>
-<p><span><%= link "New Underling", to: Routes.management_path(@conn, :new) %></span></p>
-<p><span><%= link "New Task", to: Routes.task_path(@conn, :new) %></span></p>
-<br>
+<p><span><%= link "New Task", to: Routes.task_path(@conn, :new) %></span> | <span><%= link "New Underling", to: Routes.management_path(@conn, :new) %></span></p>
 <p><h3>Your Manager <%= @manager_id %></h3> </p>
 <%= for m <- @manager_id do %>
     <%= for user <- @users do %>
@@ -21,7 +19,9 @@
             <th>Title</th>
             <th>Description</th>
             <th>Completed</th>
-            <th>Time Spent</th>
+            <th>Time Started</th>
+            <th>Time Ended</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -35,9 +35,16 @@
             <td><%= link(task.title,to: Routes.task_path(@conn, :show, task) )%></td>
             <td><%= task.description %></td>
             <td><%= task.completed %></td>
-            <td><%= task.time %></td>
+            <td><%= for timeblock <- task.timeblock do %>
+                    <%= timeblock.start_time %>   
+                <% end %>
+            </td>
+            <td><%= for timeblock <- task.timeblock do %>
+                    <%= timeblock.end_time %>   
+                <% end %>
+            </td>
             <td>
-                <%= link "Edit", to: Routes.task_path(@conn, :edit, task) %>
+                <%= link "Edit", to: Routes.task_path(@conn, :edit, task) %> | 
                 <%= link "Delete", to: Routes.task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"] %>
             </td>
         </tr>
@@ -58,7 +65,10 @@
             <th>Title</th>
             <th>Description</th>
             <th>Completed</th>
-            <th>Time Spent</th>
+            <th>Time Started</th>
+            <th>Time Ended</th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -68,8 +78,16 @@
             <td><%= underling_task.description %></td>
             <td><%= underling_task.completed %></td>
             <td><%= underling_task.time %></td>
+            <td><%= for timeblock <- underling_task.timeblock do %>
+                    <%= timeblock.start_time %>   
+                <% end %>
+            </td>
+            <td><%= for timeblock <- underling_task.timeblock do %>
+                    <%= timeblock.end_time %>   
+                <% end %>
+            </td>
             <td>
-                <%= link "Edit", to: Routes.task_path(@conn, :edit, underling_task) %>
+                <%= link "Edit", to: Routes.task_path(@conn, :edit, underling_task) %> | 
                 <%= link "Delete", to: Routes.task_path(@conn, :delete, underling_task), method: :delete, data: [confirm: "Are you sure?"] %>
             </td>
         </tr>    

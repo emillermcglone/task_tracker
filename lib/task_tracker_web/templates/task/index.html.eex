@@ -1,5 +1,5 @@
 <h1>All Tasks</h1>
-<span><%= link "New Task", to: Routes.task_path(@conn, :new) %></span>
+<p><span><%= link "New Task", to: Routes.task_path(@conn, :new) %></span><p>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -8,7 +8,8 @@
       <th>Title</th>
       <th>Description</th>
       <th>Completed</th>
-      <th>Time Spent</th>
+      <th>Time Started</th>
+      <th>Time Ended</th>
 
       <th></th>
     </tr>
@@ -29,18 +30,24 @@
         <td><%= link(task.title, to: Routes.task_path(@conn, :show, task))%></td>
         <td><%= task.description %></td>
         <td><%= task.completed %></td>
-        <td><%= task.time %></td>
-
-      <td>
-        <%= if @current_user.id == task.assignee_id || @current_user.id == task.creator_id do %>
-          <%= link "Edit", to: Routes.task_path(@conn, :edit, task) %>
+        <td><%= for timeblock <- task.timeblock do %>
+          <%= timeblock.start_time %>   
         <% end %>
-        <%= if @current_user.id == task.creator_id || @current_user.id == task.assignee_id do %>
-          <%= link "Delete", to: Routes.task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"] %>
+        </td>
+        <td><%= for timeblock <- task.timeblock do %>
+          <%= timeblock.end_time %>   
         <% end %>
-      </td>
+        </td>
+        <td>
+          <%= if @current_user.id == task.assignee_id || @current_user.id == task.creator_id do %>
+            <%= link "Edit", to: Routes.task_path(@conn, :edit, task) %>
+          <% end %>
+          <%= if @current_user.id == task.creator_id || @current_user.id == task.assignee_id do %>
+            <%= link "Delete", to: Routes.task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"] %>
+          <% end %>
+        </td>
       </tr>
-  <% end %>
+    <% end %>
   </tbody>
 </table>
 

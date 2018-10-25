@@ -31,8 +31,14 @@
   </li>
 
   <li>
-    <strong>Time Spent:</strong>
-    <%= @task.time %>
+    <strong>Start Time:</strong>
+      <%= for timeblock <- @task.timeblock do %>
+        <%= timeblock.start_time %>   
+      <% end %>
+      <br><strong>End Time:</strong>
+      <%= for timeblock <- @task.timeblock do %>
+        <%= timeblock.start_time %> 
+      <% end %>
   </li>
 
 </ul>

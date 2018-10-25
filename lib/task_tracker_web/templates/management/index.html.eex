@@ -1,5 +1,5 @@
 <h1>Listing Management</h1>
-
+<p><span><%= link "New Underling", to: Routes.management_path(@conn, :new) %></span></p>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -33,4 +33,4 @@
   </tbody>
 </table>
 
-<span><%= link "New Underling", to: Routes.management_path(@conn, :new) %></span>
+

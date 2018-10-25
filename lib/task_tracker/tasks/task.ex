@@ -11,6 +11,8 @@ defmodule TaskTracker.Tasks.Task do
     belongs_to :creator, TaskTracker.Users.User
     belongs_to :assignee, TaskTracker.Users.User
 
+    has_many :timeblock, TaskTracker.Timeblocks.Timeblock
+
     timestamps()
   end
 

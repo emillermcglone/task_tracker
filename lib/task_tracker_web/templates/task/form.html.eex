@@ -30,16 +30,22 @@
   </div>
 
   <%= if @current_user.id == @assigned_to do %>
-    <div class="form-group">
-    <%= label f, :time, class: "control-label" %>
-    <%= number_input f, :time, class: "form-control" %>
-    <%= error_tag f, :time %>
+    <p>Time Spent</p>
+    <div>
+      <p><span>Start time: <input id="addnew-timeblock" type="datetime-local" novalidate></span></p>
+      <p><span>End time: <input id="endnew-timeblock" type="datetime-local" novalidate></span></p>
     </div>
-  
+
+    <button class="btn btn-primary"
+      id="new-timeblock-button"
+      data-task-id="<%= @task.id %>"
+      onClick=window.addTimeBlock(this)>Add timeblock</button>
+
+    <br></br>
     <div class="form-group">
-    <%= label f, :completed, class: "control-label" %>
-    <%= checkbox f, :completed, class: "form-control" %>
-    <%= error_tag f, :completed %>
+      <%= label f, :completed, class: "control-label" %>
+      <%= checkbox f, :completed, class: "form-control" %>
+      <%= error_tag f, :completed %>
     </div>
   <%= end %>
 

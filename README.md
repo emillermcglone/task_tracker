@@ -2,9 +2,20 @@
 The user starts at an index page where they can either log in or create a new account. Users must provide
 a valid email address (it must include @) to create an account. No duplicate email addresses will be allowed. 
 
-Once logged in, users are redirected to a home page, displaying the tasks they are assigned to. They can view, update, or delete tasks assigned to them. Marking a task complete and entering time spent can only be done after the task is created and only by the user the task is assigned to. The time input must be in increments of 15 minutes. 
+Once logged in, users are redirected to a home page, displaying their manager(s), the tasks they are assigned to, and the tasks assigned to their underlings. Through the home page users can create new tasks or add new underlings.
 
-In the all tasks page, users may view, delete, or edit tasks that they have created. On both the home and all tasks pages, users can create new tasks. Once finished, users can log out. 
+They can view, update, or delete tasks assigned to them. Marking a task complete and entering time spent can only be done after the task is created and only by the user the task is assigned to. Assigned users enter time spent as multiple pairs of (start, end) timestamps. Additionally, users assigned to the task can press a "start working" and "stop working" button, creating a block of time spent working on the task. The assigned user can edit and delete the time blocks if they're wrong.
+
+In the all tasks page, users may view, delete, or edit tasks that they have created. On both the home and all tasks pages, users can create new tasks. 
+
+In the management page, users can view all users' managers/underlings. Users who are managers can edit or delete who their underlings are. From this page, users can add new underlings. 
+
+Once finished, users can log out. 
+
+# Design Choices 
+Users can have more than one manager, but duplicate records of manager/underling are not allowed. 
+As it was not specified, cyclical relationships of manager/underling are allowed. 
+Users may still assign tasks to themselves.
 
 # TaskTracker
 
