@@ -35,8 +35,8 @@
     <table class="table table-striped">
       <thread>
         <tr>
-          <th>Time Started</th>
-          <th>Time Ended</th>
+          <th>Start Time</th>
+          <th>End Time</th>
           <th></th>
           <th></th>
         </tr>
@@ -46,7 +46,11 @@
           <tr>
             <td><%= timeblock.start_time %></td>
             <td><%= timeblock.end_time %></td>
-            <td><%= link "Delete", to: Routes.timeblock_path(@conn, :delete, timeblock), method: :delete, data: [confirm: "Are you sure? Please refresh page after confirming"] %><td>
+            <td><button type="button"
+              class="btn btn-secondary"
+              data-timeblock-id="<%= timeblock.id %>"
+              onClick="window.deleteTimeBlock(this); return false;">Delete</button>
+            <td>
           </tr>
         <% end %>
       </tbody>
@@ -57,11 +61,22 @@
       <p><span>End time: <input id="endnew-timeblock" type="datetime-local"></span></p>
     </div>
     
-    <button class="btn btn-primary"
+    <button type="button"
+      class="btn btn-secondary"
       id="new-timeblock-button"
       data-task-id="<%= @task.id %>"
-      
-      onClick="window.addTimeBlock(this); return false;">Add timeblock
+      onClick="window.addTimeBlock(this); return false;">Add Timeblock
+    </button>
+    
+    <button type="button"
+      class="btn btn-success" 
+      id="start-timeblock-button">Start Tracking Time
+      </button>
+
+    <button type="button"
+      class="btn btn-danger" 
+      id="stop-timeblock-button"
+      data-task-id="<%= @task.id %>">Stop Tracking Time
     </button>
 
     <br></br>

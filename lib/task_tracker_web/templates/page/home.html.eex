@@ -44,8 +44,10 @@
                 <% end %>
             </td>
             <td>
-                <%= link "Edit", to: Routes.task_path(@conn, :edit, task) %> | 
-                <%= link "Delete", to: Routes.task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"] %>
+                <%= link "Edit", to: Routes.task_path(@conn, :edit, task) %>  
+                <%= if @current_user.id == task.creator_id do %>
+                    | <%= link "Delete", to: Routes.task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"] %>
+                <% end %>
             </td>
         </tr>
         <% end %>
