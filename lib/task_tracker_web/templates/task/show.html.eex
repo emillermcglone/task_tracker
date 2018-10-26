@@ -46,4 +46,4 @@
 
 <%= if @current_user.id == @assigned_to || @current_user.id == @created_by do %> 
   | <span><%= link "Edit", to: Routes.task_path(@conn, :edit, @task) %></span>  
-<%= end %>
+<% end %>

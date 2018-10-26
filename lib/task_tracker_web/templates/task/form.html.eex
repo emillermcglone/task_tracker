@@ -85,7 +85,7 @@
       <%= checkbox f, :completed, class: "form-control" %>
       <%= error_tag f, :completed %>
     </div>
-  <%= end %>
+  <% end %>
 
   <div class="form-group">
     <%= submit "Save", class: "btn btn-primary"  %>
